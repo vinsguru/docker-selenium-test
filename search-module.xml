@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="search-module" parallel="none" allow-return-values="true" >
+  <test name="search-test">
+    <classes>
+      <class name="com.testautomationguru.container.test.SearchTest"/>
+    </classes>
+  </test>
+</suite>
