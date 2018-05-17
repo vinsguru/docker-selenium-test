@@ -23,6 +23,7 @@ public class BaseTest {
             dc = DesiredCapabilities.firefox();
 
         String host = System.getProperty("seleniumHubHost");
+        
         driver = new RemoteWebDriver(new URL("http://" + host + ":4444/wd/hub"), dc);
         
     }
