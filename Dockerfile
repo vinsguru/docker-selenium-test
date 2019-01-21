@@ -1,12 +1,15 @@
 FROM openjdk:8-jre-slim
 
+WORKDIR /usr/share/tag
+
 # Add the project jar & copy dependencies
-ADD  target/container-test.jar /usr/share/tag/container-test.jar
-ADD  target/libs /usr/share/tag/libs
+ADD  target/selenium-docker.jar selenium-docker.jar
+ADD  target/selenium-docker-tests.jar selenium-docker-tests.jar
+ADD  target/libs libs
 
 # Add the suite xmls
-ADD order-module.xml /usr/share/tag/order-module.xml
-ADD search-module.xml /usr/share/tag/search-module.xml
+ADD order-module.xml order-module.xml
+ADD search-module.xml search-module.xml
 
 # Command line to execute the test
 # Expects below ennvironment variables
@@ -14,4 +17,4 @@ ADD search-module.xml /usr/share/tag/search-module.xml
 # MODULE  = order-module / search-module
 # GRIDHOST = selenium hub hostname / ipaddress
 
-ENTRYPOINT /usr/bin/java -cp /usr/share/tag/container-test.jar:/usr/share/tag/libs/* -DseleniumHubHost=$SELENIUM_HUB -Dbrowser=$BROWSER org.testng.TestNG /usr/share/tag/$MODULE
+ENTRYPOINT java -cp selenium-docker.jar:selenium-docker-tests.jar:libs/* -DseleniumHubHost=$SELENIUM_HUB -Dbrowser=$BROWSER org.testng.TestNG $MODULE
